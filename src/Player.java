@@ -76,9 +76,9 @@ public class Player extends Character {
 	}
 
 	public String takeMoney() {
-		String loot = "Looted: \n";
+		String loot = "Looted:";
 		this.getInventory().addMoney(this.getLocation().getThings().getMoney());
-		loot += "\t" + NumberFormat.getCurrencyInstance().format(this.getLocation().getThings().getMoney());
+		loot += "\n\t" + NumberFormat.getCurrencyInstance().format(this.getLocation().getThings().getMoney());
 		this.getLocation().getThings().setMoney(0.00);
 		return loot;
 	}

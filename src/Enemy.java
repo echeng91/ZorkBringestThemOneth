@@ -13,20 +13,27 @@ public class Enemy extends Character{
 	public Enemy(String name, HouseRoom room)
 	{
 		super(name, room);
-		room.getEnemies().add(this);
+		room.addEnemy(this);
 	}
 	
 	public Enemy(String name, HouseRoom room, int hp, int atk, int def)
 	{
 		super(name, room, hp, atk, def);
-		room.getEnemies().add(this);
+		room.addEnemy(this);
 	}
 	
 	public Enemy(String name, HouseRoom room, int hp, int atk, int def, boolean hard)
 	{
 		super(name, room, hp, atk, def);
-		room.getEnemies().add(this);
 		hardMode = hard;
+		if(hardMode)
+		{
+			this.setMaxHP(hp * 3);
+			this.setCurrentHP(hp * 3);
+			this.setPower(atk * 3);
+			this.setArmor(def * 3);
+		}
+		room.addEnemy(this);
 	}
 	
 	//Getters

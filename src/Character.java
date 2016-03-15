@@ -88,10 +88,10 @@ public abstract class Character {
 	public String takeDamage(int damage)
 	{
 		this.setCurrentHP(this.getCurrentHP() - damage);
-		String damageString = this.getID() + " takes " + damage + " damage!";
+		String damageString = this.getID() + " takes " + damage + " damage! ";
 		if(this.getCurrentHP() <= 0)
 		{
-			damageString += this.getID() + " has died. ";
+			damageString += "\n" + this.getID() + " has died. ";
 			damageString += this.dropLoot();
 		}
 		return damageString;
@@ -104,8 +104,7 @@ public abstract class Character {
 		//rolling a d20 for accuracy
 		if (1 + rnd.nextInt(20) > other.getArmor()) {
 			damage = rnd.nextInt(1 + this.getPower());//deal between 0 and power damage
-			attackString += other.takeDamage(damage);
-			other.setCurrentHP(other.getCurrentHP() - damage);
+			attackString += other.takeDamage(damage);;
 		} else {
 			attackString += this.getID() + " misses.";
 		}

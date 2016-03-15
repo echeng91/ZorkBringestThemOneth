@@ -65,7 +65,8 @@ public class House {
 		secret.addMoney((double) rnd.nextInt(100000) / 100.0);
 		// rooms populated with money
 		
-		Enemy demon = new Enemy("Char", frontRoom);
+		Enemy demon = new Enemy("demon", frontRoom, 10, 5, 5, false);
+		demon.getInventory().addItem(new Item("sword"));
 
 		// add all rooms to ArrayList to more easily search through them
 		ArrayList<HouseRoom> rooms = new ArrayList<HouseRoom>();
@@ -79,7 +80,7 @@ public class House {
 		rooms.add(secret);
 
 		System.out.print("Input name: ");
-		Player p1 = new Player(sc.nextLine(), foyer);
+		Player p1 = new Player(sc.nextLine(), foyer, 100, 5, 5);
 
 		pw.println("Name: " + p1.getID());
 
@@ -146,11 +147,19 @@ public class House {
 					String enemyName = sc.nextLine();
 					if(p1.getLocation().hasEnemy(enemyName))
 					{
-						while(p1.getLocation().getEnemyByName(enemyName).getCurrentHP() > 0 
+						Enemy enemyByName = p1.getLocation().getEnemyByName(enemyName);
+						while(enemyByName.getCurrentHP() > 0 
 								&& p1.getCurrentHP() > 0)
 						{
-							p1.attack(p1.getLocation().getEnemyByName(enemyName));
-							p1.getLocation().getEnemyByName(enemyName).attack(p1);
+							System.out.println(p1.attack(enemyByName));
+							if(enemyByName.getCurrentHP() > 0)
+							{
+								System.out.println(enemyByName.attack(p1));
+							}
+							else
+							{
+								p1.getLocation().getEnemies().remove(enemyByName);
+							}
 						}
 					}
 					else

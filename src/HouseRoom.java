@@ -146,6 +146,10 @@ public class HouseRoom extends Room {
 	public String toString() {
 		String returnString = "Room Name: " + this.getRoomName() + "\n";
 		returnString += things.toString();
+		if(!enemies.isEmpty())
+		{
+			returnString += "\n" + displayEnemies();
+		}
 		returnString += "\nConnected to: ";
 		for (HouseRoom aRoom : connectedRooms) {
 			returnString += "\n\t" + aRoom.getRoomName();
